@@ -1,10 +1,7 @@
-import React, {useState} from 'react';
 import './ExpenseForm.css';
+import {useState} from "react";
 
-const ExpenseForm = (props) => {
-    const [enteredTitle, setEnteredTitle] = useState('')
-    const [enteredAmount, setEnteredAmount] = useState('')
-    const [enteredDate, setEnteredDate] = useState('')
+const ExpenseForm = () => {
     const [userInput, setUserInput] = useState({
         enteredTitle: '',
         enteredAmount: '',
@@ -13,36 +10,34 @@ const ExpenseForm = (props) => {
     console.log(userInput)
 
     const titleChangeHandler = (event) => {
-        setEnteredTitle(event.target.value)
+        setUserInput({
+            ...userInput,
+            enteredTitle: event.target.value
+        })
     }
 
     const amountChangeHandler = (event) => {
-        setEnteredTitle(event.target.value)
+        setUserInput({
+            ...userInput,
+            enteredTitle: event.target.value
+        })
     }
 
     const dateChangeHandler = (event) => {
-        setEnteredTitle(event.target.value)
-    }
-
-    const submitHandler = (event) => {
-        event.preventDefault()
-        const expenseData = {
-            title: enteredTitle,
-            amount: enteredAmount,
-            date: new Date(enteredDate)
-        }
-        props.onSaveExpenseData(expenseData)
-        setEnteredTitle('')
+        setUserInput({
+            ...userInput,
+            enteredDate: event.target.value
+        })
     }
 
     return(
         <div class="App">
             <div class="new-expense">
-                <form onSubmit={submitHandler}>
+                <form>
                     <div className="new-expense__controls">
                         <div className="new-expense__control">
                             <label>Title</label>
-                            <input type="text" onChange={titleChangeHandler} value={enteredTitle} />
+                            <input type="text" onChange={titleChangeHandler} />
                         </div>
                         <div className="new-expense__control">
                             <label>Amount</label>
@@ -59,8 +54,6 @@ const ExpenseForm = (props) => {
                 </form>
             </div>
         </div>
-
     )
 }
-
 export default ExpenseForm
